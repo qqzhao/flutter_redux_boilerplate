@@ -150,6 +150,17 @@ typedef void NextDispatcher(dynamic action);
 ///     // Print the updated state. As an alternative, you can use the
 ///     // `store.onChange.listen` to respond to all state change events.
 ///     print(store.state); // prints "1"
+
+typedef NextDispatcherNew = void Function(dynamic action);
+
+// 这里相当于为函数多带了两个参数，然后返回一个新的函数闭包。
+NextDispatcherNew aFun = (dynamic action){
+  Store store;
+  Middleware nextMiddleware;
+  NextDispatcher next;
+  return nextMiddleware(store, action, next);
+};
+
 class Store<State> {
   /// The [Reducer] for your Store. Allows you to get the current reducer or
   /// replace it with a new one if need be.
@@ -157,7 +168,7 @@ class Store<State> {
 
   final StreamController<State> _changeController;
   State _state;
-  List<NextDispatcher> _dispatchers;
+  List<NextDispatcherNew> _dispatchers;
 
   Store(
     this.reducer, {
@@ -231,7 +242,21 @@ class Store<State> {
 //    print('_createDispatchers===========================');
     final dispatchers = <NextDispatcher>[]..add(reduceAndNotify);
 
-    // Convert each [Middleware] into a [NextDispatcher]
+//     Convert each [Middleware] into a [NextDispatcher]
+//     如上面 [aFun] 定义将原来的 1个参数转化成3个参数（带上当前的store和next）。
+//     也会把this和next保存到函数闭包中。
+//     调用的时候，相当于调用 Middleware.
+//      void thunkMiddleware<State>(
+//          Store<State> store,
+//          dynamic action,
+//          NextDispatcher next,
+//          ) {
+//        if (action is ThunkAction<State>) {
+//          action(store);
+//        } else {
+//          next(action);
+//        }
+//      }
     for (var nextMiddleware in middleware.reversed) {
       final next = dispatchers.last;
 

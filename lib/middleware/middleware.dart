@@ -1,3 +1,4 @@
+import 'package:logging/logging.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:redux_logging/redux_logging.dart';
@@ -10,7 +11,7 @@ final persistor = new Persistor<AppState>(storage: new FlutterStorage('redux-app
 
 // Set up middlewares
 List<Middleware<AppState>> createMiddleware() => <Middleware<AppState>>[
-    thunkMiddleware,
-    persistor.createMiddleware(),
-    new LoggingMiddleware.printer(),
+    thunkMiddleware, // 函数
+    persistor.createMiddleware(), //
+//    new LoggingMiddleware.printer(level: Level.SEVERE),
 ];

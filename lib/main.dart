@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_redux_boilerplate/test/test.dart';
 import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 
 import 'package:flutter_redux_boilerplate/presentation/platform_adaptive.dart';
@@ -11,7 +12,11 @@ import 'package:flutter_redux_boilerplate/store/store.dart';
 import 'package:flutter_redux_boilerplate/middleware/middleware.dart';
 import 'package:flutter_redux_boilerplate/models/app_state.dart';
 
-void main() => runApp(new ReduxApp());
+void main() {
+  testEntry();
+  return runApp(new ReduxApp());
+}
+
 
 class ReduxApp extends StatelessWidget {
     final store = createStore();
