@@ -9,12 +9,25 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
   # Redux
-  redux: ^3.0.0
-  flutter_redux: ^0.5.2
-  redux_logging: ^0.3.0
-  redux_thunk: ^0.2.0
-  redux_persist_flutter: ^0.6.0-rc.1 
-  redux_persist: ^0.7.0-rc.2
+#  redux: ^3.0.0
+#  flutter_redux: ^0.5.2
+#  redux_logging: ^0.3.0
+#  redux_thunk: ^0.2.0
+#  redux_persist_flutter: ^0.6.0-rc.1
+#  redux_persist: ^0.7.0-rc.2
+
+  redux:
+     path: plugins/redux-3.0.0
+  flutter_redux:
+      path: plugins/flutter_redux-0.5.2
+  redux_logging:
+      path: plugins/redux_logging-0.3.0
+  redux_thunk:
+      path: plugins/redux_thunk-0.2.0
+  redux_persist_flutter:
+      path: plugins/redux_persist_flutter-0.6.0
+  redux_persist:
+      path: plugins/redux_persist-0.7.0
 
 dev_dependencies:
   flutter_test:
